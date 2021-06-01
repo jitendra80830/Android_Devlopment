@@ -57,12 +57,12 @@
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:contentDescription="Add"
             android:onClick="performOperation"
-            android:tag="add"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            android:src="@drawable/outline_add_24"
+            android:tag="add" />
 
         <ImageButton
             android:id="@+id/imageButton2"
@@ -72,9 +72,19 @@
             android:layout_weight="6"
             android:contentDescription="Add"
             android:onClick="performOperation"
-            android:tag="sub"
-            app:srcCompat="@android:drawable/button_onoff_indicator_on" />
+            android:src="@drawable/outline_remove_24"
+            android:tag="sub" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,4 +2,5 @@
     <string name="app_name">My Application</string>
     <string name="result">Result</string>
     <string name="Add">Add</string>
+    <string name="next">NEXT</string>
 </resources>
