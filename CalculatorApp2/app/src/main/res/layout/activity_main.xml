@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Result"
+        android:text="@string/result"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
@@ -22,14 +22,15 @@
 
     <EditText
         android:id="@+id/editTextNumber"
-        android:layout_width="138dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="130dp"
+        android:layout_width="143dp"
+        android:layout_height="39dp"
         android:layout_marginLeft="20dp"
-        android:ems="10"
-        android:inputType="number"
+        android:layout_marginBottom="130dp"
         app:layout_constraintBottom_toTopOf="@+id/imageButton5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="number"
+        android:autofillHints=""
+        android:layout_marginStart="20dp" />
 
     <EditText
         android:id="@+id/editTextNumber2"
@@ -40,7 +41,9 @@
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/imageButton5"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:autofillHints="" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -48,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginLeft="70dp"
-        android:contentDescription="Add"
+        android:contentDescription="@string/add"
         android:onClick="performOperations"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +63,7 @@
         android:layout_width="60dp"
         android:layout_height="43dp"
         android:layout_marginStart="32dp"
-        android:contentDescription="Sub"
+        android:contentDescription="@string/sub"
         android:onClick="performOperations"
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="160dp"
@@ -73,7 +76,7 @@
         android:id="@+id/imageButton6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Mul"
+        android:contentDescription="@string/mul"
         android:onClick="performOperations"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,5 +84,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageButton5"
         app:srcCompat="@android:drawable/ic_delete"
         android:tag="mul"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
