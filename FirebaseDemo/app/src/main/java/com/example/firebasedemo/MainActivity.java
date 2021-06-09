@@ -2,7 +2,7 @@ package com.example.firebasedemo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.annotation.NonNull;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,14 +36,17 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MyResult","Button Clicked");
                 String value = editText.getText().toString();
 
-                FirebaseDatabase.getInstance().getReference("sameData").setValue(value).addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
+                FirebaseDatabase.getInstance().getReference("sameData").push().setValue(value).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @org.jetbrains.annotations.NotNull Task<Void> task) {
+                        if(task.isSuccessful()){
 
-                        Toast.makeText(MainActivity.this,"Added to Firebase",Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this,"Added to Firebase",Toast.LENGTH_LONG).show();
 
-                    }else {
+                        }else {
 
-                        Toast.makeText(MainActivity.this,"Fail to add",Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this,"Fail to add",Toast.LENGTH_LONG).show();
+                        }
                     }
 
                 });
