@@ -46,4 +46,19 @@ public class TaskHandler extends DatabaseHelper{
         }
         return taskList;
     }
+    public boolean updateTask(Task task){
+        ContentValues values = new ContentValues();
+        values.put("title",task.getTitle());
+        values.put("description",task.getDescription());
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean isSuccess = db.update("tasks",values,"task_id = "+task.getId(),null) > 0;
+        db.close();
+        return isSuccess;
+    }
+    public boolean deleteTask(int taskId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean isSuccess = db.delete("tasks", "task_id = " + taskId, null) > 0;
+        db.close();
+        return isSuccess;
+    }
 }
