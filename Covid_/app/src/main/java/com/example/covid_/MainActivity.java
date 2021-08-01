@@ -2,6 +2,7 @@ package com.example.covid_;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         list = new ArrayList<>();
 
         init();
+        findViewById(R.id.cName).setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this,CountryActivity.class)));
 
         ApiUtilities.getApiInterface().getCountryData()
                 .enqueue(new Callback<List<CountryData>>() {
