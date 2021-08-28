@@ -3,10 +3,23 @@ package com.example.quizeapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.TestLooperManager;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private TextView optionA , optionB , optionC , optionD;
+
+    private TextView questionNumber , question , score;
+    private TextView checkout1 , getCheckout2;
+
+    int currentIndex;
+    int mScore =0;
+    int qn =1;
+    ProgressBar progressBar;
+
+    int currentQuestion , currentOptionA , currentOptionB , currentOptionC , currentOptionD;
 
     private AnswerClass[] questionBank = new AnswerClass[]
             {
@@ -20,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     new AnswerClass(R.string.question_8, R.string.question_8A , R.string.question_8B , R.string.question_8C ,R.string.question_8D , R.string.answer_8)
     };
 
+    final  int PROGRESS_BAR = (int) Math.ceil(100/questionBank.length);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +44,97 @@ public class MainActivity extends AppCompatActivity {
         optionB = findViewById(R.id.optionB);
         optionC = findViewById(R.id.optionC);
         optionD = findViewById(R.id.optionD);
+
+        question = findViewById(R.id.question);
+        questionNumber = findViewById(R.id.QuestionNumber);
+        score = findViewById(R.id.score);
+
+        checkout1 = findViewById(R.id.selectedOption);
+        getCheckout2 = findViewById(R.id.CorrectAnswer);
+
+        progressBar = findViewById(R.id.progress_bar);
+
+        currentQuestion = questionBank[currentIndex].getQuestionId();
+        question.setText(currentQuestion);
+
+        currentOptionA = questionBank[currentIndex].getOptionA();
+        optionA.setText(currentOptionA);
+
+        currentOptionB = questionBank[currentIndex].getOptionB();
+        optionB.setText(currentOptionB);
+
+        currentOptionC = questionBank[currentIndex].getOptionC();
+        optionC.setText(currentOptionC);;
+
+        currentOptionD = questionBank[currentIndex].getOptionD();
+        optionD.setText(currentOptionD);
+
+        optionA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(currentOptionA);
+                updateQuestion();
+
+            }
+        });
+        optionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(currentOptionB);
+                updateQuestion();
+
+
+            }
+        });
+        optionC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(currentOptionC);
+                updateQuestion();
+
+
+            }
+        });
+        optionD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(currentOptionD);
+                updateQuestion();
+
+
+            }
+        });
+    }
+
+    private void checkAnswer(int userSelection) {
+
+    }
+
+    private void updateQuestion() {
+        currentIndex = (currentIndex + 1) % questionBank.length;
+
+        currentQuestion = questionBank[currentIndex].getQuestionId();
+        question.setText(currentQuestion);
+
+        currentOptionA = questionBank[currentIndex].getOptionA();
+        optionA.setText(currentOptionA);
+
+        currentOptionB = questionBank[currentIndex].getOptionB();
+        optionB.setText(currentOptionB);
+
+        currentOptionC = questionBank[currentIndex].getOptionC();
+        optionC.setText(currentOptionC);;
+
+        currentOptionD = questionBank[currentIndex].getOptionD();
+        optionD.setText(currentOptionD);
+
+        qn = qn + 1;
+
+        if(qn < questionBank.length){
+            questionNumber.setText(qn+"/" +questionBank.length +" questions");
+        }
+        score.setText("Score" +mScore +"/" +questionBank.length);
+        progressBar.incrementProgressBy(PROGRESS_BAR);
+
     }
 }
