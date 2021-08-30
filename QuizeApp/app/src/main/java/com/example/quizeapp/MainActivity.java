@@ -1,12 +1,15 @@
 package com.example.quizeapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.TestLooperManager;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private TextView optionA , optionB , optionC , optionD;
@@ -107,11 +110,54 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkAnswer(int userSelection) {
+        int correctAnswer = questionBank[currentIndex].getAnswerId();
+
+        checkout1.setText(userSelection);
+        getCheckout2.setText(correctAnswer);
+
+        String m = checkout1.getText().toString().trim();
+        String n = getCheckout2.getText().toString().intern();
+
+        if(m.equals(n)){
+            Toast.makeText(getApplicationContext() , "Right" , Toast.LENGTH_SHORT).show();
+            mScore = mScore +1 ;
+        }else {
+
+            Toast.makeText(getApplicationContext() , "Wrong" , Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 
     private void updateQuestion() {
         currentIndex = (currentIndex + 1) % questionBank.length;
+
+        if(currentIndex == 0){
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Game Over");
+            alert.setCancelable(false);
+            alert.setMessage("Your Score is "+mScore+" Points");
+            alert.setPositiveButton("Close Application", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();;
+                }
+            });
+            alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mScore = 0;
+                    qn =1;
+                    progressBar.setProgress(0);
+                    score.setText("Score" +mScore +"/" +questionBank.length);
+                    questionNumber.setText(qn+"/" +questionBank.length +" questions");
+
+
+                }
+            });
+            alert.show();
+        }
 
         currentQuestion = questionBank[currentIndex].getQuestionId();
         question.setText(currentQuestion);
@@ -129,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
         optionD.setText(currentOptionD);
 
         qn = qn + 1;
+
+
 
         if(qn < questionBank.length){
             questionNumber.setText(qn+"/" +questionBank.length +" questions");

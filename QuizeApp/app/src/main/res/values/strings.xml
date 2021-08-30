@@ -59,5 +59,7 @@
     <string name="question_8C">Record</string>
     <string name="question_8D">File</string>
     <string name="answer_8">Field</string>
+    <string name="selectedoption">selectedoption</string>
+    <string name="correctanswer">correctAnswer</string>
 
 </resources>
