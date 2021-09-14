@@ -8,5 +8,9 @@
     <color name="blue">#039BE5</color>
     <color name="purple50">#6A1B9A</color>
     <color name="red50">#EF5350</color>
+    <color name="trdit">#ef4fa6</color>
+    <color name="anolog">#d602ee</color>
+    <color name="white">#FAFAFA</color>
+    <color name="black">#212121</color>
 
 </resources>
