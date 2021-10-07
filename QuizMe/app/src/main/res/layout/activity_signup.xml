@@ -113,7 +113,7 @@
           android:padding="15dp" />
 
       <Button
-          android:id="@+id/submitButton"
+          android:id="@+id/createNewBtm"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginStart="10dp"
@@ -128,7 +128,7 @@
           app:backgroundTint="@color/blue" />
 
       <Button
-          android:id="@+id/loginButton"
+          android:id="@+id/submitButn"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginStart="10dp"
@@ -147,6 +147,7 @@
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
           android:layout_marginBottom="10dp"
+          android:fontFamily="sans-serif-black"
           android:gravity="center"
           android:text="By signing up you agree to all privacy and turn and condition"
           android:textSize="12sp" />
