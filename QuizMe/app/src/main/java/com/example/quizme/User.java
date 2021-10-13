@@ -2,9 +2,20 @@ package com.example.quizme;
 
 public class User {
     private String email , name , pass ,referCode;
+    private long coins = 25;
 
     public User() {
     }
+
+    public long getCoins() {
+        return coins;
+    }
+
+    public void setCoins(long coins) {
+        this.coins = coins;
+    }
+
+
 
     public User(String name,String email, String pass, String referCode) {
         this.email = email;

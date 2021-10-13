@@ -1,43 +1,89 @@
 package com.example.quizme;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.quizme.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+
+import me.ibrahimsn.lib.OnItemSelectedListener;
+import me.ibrahimsn.lib.SmoothBottomBar;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         setSupportActionBar(binding.toolbar);
 
-        ArrayList<CategoryModel> categories = new ArrayList<>();
+        FragmentTransaction homeTrans = getSupportFragmentManager().beginTransaction();
+        homeTrans.replace(R.id.cotent ,new HomeFragment());
+        homeTrans.commit();
 
-        categories.add(new CategoryModel("","Mathematics","https://static.vecteezy.com/system/resources/previews/000/502/111/original/mathematics-icon-design-vector.jpg"));
-        categories.add(new CategoryModel("","Science","https://static.vecteezy.com/system/resources/previews/000/502/111/original/mathematics-icon-design-vector.jpg"));
-        categories.add(new CategoryModel("","History","https://static.vecteezy.com/system/resources/previews/000/502/111/original/mathematics-icon-design-vector.jpg"));
-        categories.add(new CategoryModel("","Languages","https://static.vecteezy.com/system/resources/previews/000/502/111/original/mathematics-icon-design-vector.jpg"));
-        categories.add(new CategoryModel("","Puzzle","https://static.vecteezy.com/system/resources/previews/000/502/111/original/mathematics-icon-design-vector.jpg"));
-        categories.add(new CategoryModel("","Drama","https://static.vecteezy.com/system/resources/previews/000/502/111/original/mathematics-icon-design-vector.jpg"));
+        binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id){
+                    case R.id.home:
+                        FragmentTransaction homeTrans = getSupportFragmentManager().beginTransaction();
+                        homeTrans.replace(R.id.cotent ,new HomeFragment());
+                        homeTrans.commit();
+                        //Toast.makeText(MainActivity.this ,"Home",Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.rank:
+                        FragmentTransaction rankTrans = getSupportFragmentManager().beginTransaction();
+                        rankTrans.replace(R.id.cotent ,new LeaderboardFragment());
+                        rankTrans.commit();
+                        //Toast.makeText(MainActivity.this ,"Rank",Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.wallet:
+                        FragmentTransaction walletTrans = getSupportFragmentManager().beginTransaction();
+                        walletTrans.replace(R.id.cotent ,new WalletFragment());
+                        walletTrans.commit();
+                        //Toast.makeText(MainActivity.this ,"Wallet",Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.profile:
+                        FragmentTransaction profileTrans = getSupportFragmentManager().beginTransaction();
+                        profileTrans.replace(R.id.cotent ,new ProfilFragment());
+                        profileTrans.commit();
+                        //Toast.makeText(MainActivity.this ,"Profile",Toast.LENGTH_LONG).show();
+                        break;
+                }
+                return true;
+            }
+        });
 
-        CategoryAdapter adapter = new CategoryAdapter(this , categories);
-        binding.catogeryList.setLayoutManager(new GridLayoutManager(this , 2));
-        binding.catogeryList.setAdapter(adapter);
+
+
+
     }
 
     @Override
