@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.quizme.databinding.FragmentWalletBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +30,7 @@ public class WalletFragment extends Fragment {
     }
     FragmentWalletBinding binding;
     FirebaseFirestore database;
+    User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,18 +45,37 @@ public class WalletFragment extends Fragment {
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User user = documentSnapshot.toObject(User.class);
+                 user = documentSnapshot.toObject(User.class);
                 binding.currentCoins.setText(String.valueOf(user.getCoins()));
             }
         });
 
 
+        binding.sendRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(user.getCoins() > 50000){
+                    String uid = FirebaseAuth.getInstance().getUid();
+                    String paypal = binding.emailBox.getText().toString();
+                    WithdrawRequest request = new WithdrawRequest(uid , paypal ,user.getName());
 
+                    database
+                            .collection("withdraws")
+                            .document(uid)
+                            .set(request).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(getContext() , "Request Sent Successfully" , Toast.LENGTH_SHORT).show();
 
+                        }
+                    });
 
+                }else {
+                    Toast.makeText(getContext() , "You Need more coins to Withdraw" , Toast.LENGTH_SHORT).show();
+                }
 
-
-
+            }
+        });
 
         return binding.getRoot();
     }

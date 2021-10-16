@@ -1,6 +1,7 @@
 package com.example.quizme;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Glide.with(context)
                 .load(model.getCategoryImage())
                 .into(holder.imageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context ,QuizActivity.class);
+                intent.putExtra("catId" ,model.getCategoryId());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
