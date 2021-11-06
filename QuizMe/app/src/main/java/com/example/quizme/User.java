@@ -1,7 +1,7 @@
 package com.example.quizme;
 
 public class User {
-    private String email , name , pass ,referCode;
+    private String email , name , pass ,profile,referCode;
     private long coins = 25;
 
     public User() {
@@ -22,6 +22,14 @@ public class User {
         this.name = name;
         this.pass = pass;
         this.referCode = referCode;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
     public String getEmail() {
@@ -55,4 +63,5 @@ public class User {
     public void setReferCode(String referCode) {
         this.referCode = referCode;
     }
+
 }

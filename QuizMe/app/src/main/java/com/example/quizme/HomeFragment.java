@@ -1,5 +1,6 @@
 package com.example.quizme;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -67,6 +68,14 @@ public class HomeFragment extends Fragment {
 
         binding.catogeryList.setLayoutManager(new GridLayoutManager(getContext() , 2));
         binding.catogeryList.setAdapter(adapter);
+
+        binding.spinewheel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext() , SpinerActivity.class));
+            }
+        });
+        
 
         // Inflate the layout for this fragment
         return binding.getRoot();
