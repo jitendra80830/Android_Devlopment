@@ -10,8 +10,8 @@ import com.example.dictionaryapp.R;
 
 public class MeaningViewHolder extends RecyclerView.ViewHolder {
 
-    TextView textView_PartsOfSpeech;
-    RecyclerView recyclerView_Definition;
+   public TextView textView_PartsOfSpeech;
+   public RecyclerView recyclerView_Definition;
     public MeaningViewHolder(@NonNull View itemView) {
         super(itemView);
 
